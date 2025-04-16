@@ -1,0 +1,9 @@
+<p>{{ author.firstname }} {{ author.name }}</p>
+<img [src]="author.avatar" [alt]="`${author.firstname} ${author.name}`" />
+<p>Née le {{ author.birthday }}</p>
+<p>Âge: {{ author.age() }}</p>
+<select [(ngModel)]="author.birthday">
+  <option value="2019-12-31">2019</option>
+  <option value="2018-12-31">2018</option>
+  <option value="2017-12-31">2017</option>
+</select>

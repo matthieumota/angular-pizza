@@ -1,0 +1,15 @@
+<div>
+  <button
+    [disabled]="value <= 0"
+    (click)="decrement()"
+  >
+    -
+  </button>
+  <span>{{ value }}</span>
+  <button
+    *ngIf="value < 10"
+    (click)="increment()"
+  >
+    +
+  </button>
+</div>
