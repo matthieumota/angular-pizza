@@ -1,0 +1,6 @@
+<h2>{{ pizza.name }}</h2>
+<h2 [textContent]="pizza.name"></h2>
+<input type="text" [value]="pizza.name" (input)="pizza.name = $any($event.target).value">
+<input type="text" [(ngModel)]="pizza.name">
+<p>{{ pizza.price }}</p>
+<img [src]="`/assets/pizzas/${pizza.image}`" [alt]="pizza.name">
