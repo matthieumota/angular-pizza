@@ -7,6 +7,7 @@
   <input type="text" [(ngModel)]="pizza.name">
   <p>{{ pizza.price }}</p>
   <img [src]="`/assets/pizzas/${pizza.image}`" [alt]="pizza.name">
+  <button (click)="onCancel()">Annuler</button>
 </div>
 
 <ul class="pizzas">

@@ -18,10 +18,19 @@ const PIZZAS: Pizza[] = [
 })
 export class AppComponent {
   title = 'Pizza Party';
-  pizza!: Pizza;
+  pizza?: Pizza;
   pizzas: Pizza[] = PIZZAS;
 
   onSelect(pizza: Pizza) {
+    if (this.pizza && this.pizza.id === pizza.id) {
+      this.pizza = undefined
+      return
+    }
+
     this.pizza = { ...pizza }; // On fait un clone de l'objet pour éviter les "références"
+  }
+
+  onCancel() {
+    this.pizza = undefined
   }
 }
