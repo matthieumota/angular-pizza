@@ -1,0 +1,24 @@
+.pizzas {
+  display: flex;
+  gap: 40px;
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &.selected {
+      border-color: lightgray;
+    }
+  }
+
+  img {
+    width: 150px;
+  }
+}
+
+:host {
+  background-color: rgb(243, 243, 243);
+  display: block;
+}
