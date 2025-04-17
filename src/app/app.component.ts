@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.loading = true
 
-    this.pizzaService.getPizzasSlowly().then(pizzas => {
+    this.pizzaService.getPizzasSlowly().subscribe(pizzas => {
       this.pizzas = pizzas
       this.loading = false
     })
