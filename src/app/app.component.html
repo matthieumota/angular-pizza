@@ -2,6 +2,10 @@
 
 <app-pizza [pizza]="pizza" (canceled)="onCancel($event)" />
 
+<p *ngIf="loading">
+  Chargement...
+</p>
+
 <ul class="pizzas">
   <li
     *ngFor="let p of pizzas"

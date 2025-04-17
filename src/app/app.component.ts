@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pizza } from './models/pizza';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -6,13 +6,7 @@ import { PizzaComponent } from './pizza/pizza.component';
 import { CounterComponent } from "./counter/counter.component";
 import { AuthorComponent } from "./author/author.component";
 import { User } from './models/user';
-
-const PIZZAS: Pizza[] = [
-  { id: 1, name: 'Reine', price: 12, image: 'reine.jpg' },
-  { id: 2, name: '4 fromages', price: 13, image: '4-fromages.jpg' },
-  { id: 3, name: 'Orientale', price: 11, image: 'orientale.jpg' },
-  { id: 4, name: 'Cannibale', price: 9, image: 'cannibale.jpg' }
-];
+import { PizzaService } from './services/pizza.service';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +14,27 @@ const PIZZAS: Pizza[] = [
   styleUrl: './app.component.scss',
   imports: [FormsModule, CommonModule, PizzaComponent, CounterComponent, AuthorComponent],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Pizza Party';
   pizza?: Pizza;
-  pizzas: Pizza[] = PIZZAS;
+  pizzas!: Pizza[];
   user = new User('Mota', 'Fiorella', '2019-12-31', 'https://randomuser.me/api/portraits/women/1.jpg');
   total: number = 15;
+  loading: boolean = false;
+
+  // pizzaService: PizzaService = new PizzaService(new HttpBackend(), new UserService(new HttpBackend()))
+
+  constructor(private pizzaService: PizzaService) {
+  }
+
+  ngOnInit() {
+    this.loading = true
+
+    this.pizzaService.getPizzasSlowly().then(pizzas => {
+      this.pizzas = pizzas
+      this.loading = false
+    })
+  }
 
   onSelect(pizza: Pizza) {
     if (this.pizza && this.pizza.id === pizza.id) {
