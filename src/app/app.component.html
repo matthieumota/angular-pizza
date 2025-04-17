@@ -19,8 +19,10 @@
   </ng-template> -->
 </ul>
 
-<app-counter />
-<app-counter [value]="5" />
-<app-counter [value]="10" />
+<app-counter (changed)="computeTotal($event)" />
+<app-counter [value]="5" (changed)="computeTotal($event)" />
+<app-counter [value]="10" (changed)="computeTotal($event)" />
+
+<p>{{ total }}</p>
 
 <app-author [author]="user" />

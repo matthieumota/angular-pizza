@@ -25,6 +25,7 @@ export class AppComponent {
   pizza?: Pizza;
   pizzas: Pizza[] = PIZZAS;
   user = new User('Mota', 'Fiorella', '2019-12-31', 'https://randomuser.me/api/portraits/women/1.jpg');
+  total: number = 15;
 
   onSelect(pizza: Pizza) {
     if (this.pizza && this.pizza.id === pizza.id) {
@@ -37,5 +38,9 @@ export class AppComponent {
 
   onCancel(event: any) {
     this.pizza = event
+  }
+
+  computeTotal(event: number) {
+    this.total += event
   }
 }
