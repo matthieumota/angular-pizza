@@ -3,7 +3,7 @@
 <p>Née le {{ author.birthday }}</p>
 <p>Âge: {{ author.age() }}</p>
 <select [(ngModel)]="author.birthday">
-  <option value="2019-12-31">2019</option>
-  <option value="2018-12-31">2018</option>
-  <option value="2017-12-31">2017</option>
+  <option *ngFor="let year of years" [value]="`${year}-${author.month()}-${author.day()}`">
+    {{ year }}
+  </option>
 </select>

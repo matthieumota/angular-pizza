@@ -23,4 +23,16 @@ export class User {
 
     return age
   }
+
+  month() {
+    const birthday = new Date(this.birthday)
+
+    return (birthday.getMonth() + 1).toString()
+  }
+
+  day() {
+    const birthday = new Date(this.birthday)
+
+    return birthday.getDate().toString()
+  }
 }
