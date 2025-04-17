@@ -33,4 +33,8 @@ export class PizzaService {
   createPizza(pizza: Pizza): Observable<Pizza> {
     return this.http.post<Pizza>(`/api/pizzas`, pizza)
   }
+
+  deletePizza(pizza: Pizza): Observable<Pizza> {
+    return this.http.delete<Pizza>(`/api/pizzas/${pizza.id}`)
+  }
 }

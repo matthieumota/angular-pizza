@@ -9,11 +9,13 @@
 <ul class="pizzas">
   <li
     *ngFor="let p of pizzas"
-    (click)="onSelect(p)"
     [class.selected]="pizza && p.id === pizza.id"
   >
-    <h3>{{ p.name }}</h3>
-    <img [src]="`/assets/pizzas/${p.image}`" [alt]="p.name">
+    <div (click)="onSelect(p)">
+      <h3>{{ p.name }}</h3>
+      <img [src]="`/assets/pizzas/${p.image}`" [alt]="p.name">
+    </div>
+    <button (click)="delete(p)">X</button>
   </li>
 
   <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas">

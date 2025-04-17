@@ -66,6 +66,14 @@ export class AppComponent implements OnInit {
     this.pizza = event
   }
 
+  delete(pizza: Pizza) {
+    if (!confirm('Voulez-vous vraiment supprimer cette pizza ?')) return
+
+    this.pizzaService.deletePizza(pizza).subscribe(_ => {
+      this.pizzas = this.pizzas.filter(p => p.id !== pizza.id)
+    })
+  }
+
   computeTotal(event: number) {
     this.total += event
   }
