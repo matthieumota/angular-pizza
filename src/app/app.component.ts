@@ -7,6 +7,7 @@ import { CounterComponent } from "./counter/counter.component";
 import { AuthorComponent } from "./author/author.component";
 import { User } from './models/user';
 import { PizzaService } from './services/pizza.service';
+import { MessageService } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,14 @@ export class AppComponent implements OnInit {
   user = new User('Mota', 'Fiorella', '2019-12-31', 'https://randomuser.me/api/portraits/women/1.jpg');
   total: number = 15;
   loading: boolean = false;
+  messages: string[] = []
 
   // pizzaService: PizzaService = new PizzaService(new HttpBackend(), new UserService(new HttpBackend()))
 
-  constructor(private pizzaService: PizzaService) {
+  constructor(
+    private pizzaService: PizzaService,
+    private messageService: MessageService
+  ) {
   }
 
   ngOnInit() {
@@ -34,6 +39,8 @@ export class AppComponent implements OnInit {
       this.pizzas = pizzas
       this.loading = false
     })
+
+    this.messages = this.messageService.getMessages()
   }
 
   onSelect(pizza: Pizza) {
@@ -51,5 +58,9 @@ export class AppComponent implements OnInit {
 
   computeTotal(event: number) {
     this.total += event
+  }
+
+  deleteMessage(index: number) {
+    this.messageService.deleteMessage(index)
   }
 }

@@ -23,6 +23,13 @@
   </ng-template> -->
 </ul>
 
+<ul>
+  <li *ngFor="let message of messages; index as i">
+    <h3>{{ message }}</h3>
+    <button (click)="deleteMessage(i)">X</button>
+  </li>
+</ul>
+
 <app-counter (changed)="computeTotal($event)" />
 <app-counter [value]="5" (changed)="computeTotal($event)" />
 <app-counter [value]="10" (changed)="computeTotal($event)" />
