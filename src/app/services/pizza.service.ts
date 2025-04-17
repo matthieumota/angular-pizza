@@ -37,4 +37,9 @@ export class PizzaService {
   deletePizza(pizza: Pizza): Observable<Pizza> {
     return this.http.delete<Pizza>(`/api/pizzas/${pizza.id}`)
   }
+
+  search(value: string): Observable<Pizza[]> {
+    console.log(`call api with ${value}`)
+    return this.http.get< Pizza[]>(`/api/pizzas?q=${value}`);
+  }
 }

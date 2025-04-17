@@ -9,12 +9,13 @@ import { User } from './models/user';
 import { PizzaService } from './services/pizza.service';
 import { MessageService } from './services/message.service';
 import { filter, finalize, switchMap } from 'rxjs';
+import { PizzaSearchComponent } from './pizza-search/pizza-search.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [FormsModule, CommonModule, PizzaComponent, CounterComponent, AuthorComponent],
+  imports: [FormsModule, CommonModule, PizzaComponent, CounterComponent, AuthorComponent, PizzaSearchComponent],
 })
 export class AppComponent implements OnInit {
   title = 'Pizza Party';

@@ -41,6 +41,8 @@
   <input type="text" [(ngModel)]="newPizza.price" (keydown)="save($event)">
 </div>
 
+<app-pizza-search />
+
 <app-counter (changed)="computeTotal($event)" />
 <app-counter [value]="5" (changed)="computeTotal($event)" />
 <app-counter [value]="10" (changed)="computeTotal($event)" />
