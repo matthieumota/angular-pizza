@@ -30,6 +30,15 @@
   </li>
 </ul>
 
+<button (click)="toggleNewPizza()">
+  Ajouter une pizza
+</button>
+
+<div *ngIf="showNewPizza">
+  <input type="text" [(ngModel)]="newPizza.name" (keydown)="save($event)">
+  <input type="text" [(ngModel)]="newPizza.price" (keydown)="save($event)">
+</div>
+
 <app-counter (changed)="computeTotal($event)" />
 <app-counter [value]="5" (changed)="computeTotal($event)" />
 <app-counter [value]="10" (changed)="computeTotal($event)" />

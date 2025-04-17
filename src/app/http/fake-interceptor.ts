@@ -26,7 +26,7 @@ const response = (body?: any, status: number = 200) => {
   return of(new HttpResponse({ status, body })).pipe(delay(200));
 };
 
-const syncStorage = (pizzas?: Pizza[]) => {
+const syncStorage = (pizzas: Pizza[]) => {
   if (typeof localStorage !== 'undefined') {
     localStorage.setItem('pizzas', JSON.stringify(pizzas));
   }
@@ -77,7 +77,7 @@ export class FakeInterceptor implements HttpInterceptor {
     } else if (url.match(/\/api\/pizzas\/\d+/) && method === 'DELETE') {
       pizzas = pizzas.filter(p => p.id !== idFromUrl());
 
-      syncStorage();
+      syncStorage(pizzas);
 
       return response();
     } else if (url.includes('/api/pizzas') && method === 'GET') {
@@ -92,7 +92,7 @@ export class FakeInterceptor implements HttpInterceptor {
       pizza.id = pizzas.length ? Math.max(...pizzas.map(p => p.id)) + 1 : 1;
       pizzas = [ ...pizzas, pizza ];
 
-      syncStorage();
+      syncStorage(pizzas);
 
       return response(pizza);
     } else if (url.endsWith('/login') && method === 'POST') {

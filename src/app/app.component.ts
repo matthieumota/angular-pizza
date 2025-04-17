@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
   total: number = 15;
   loading: boolean = false;
   messages: string[] = []
+  showNewPizza: boolean = false
+  newPizza: Pizza = new Pizza(0, '', undefined, 'cannibale.jpg')
 
   // pizzaService: PizzaService = new PizzaService(new HttpBackend(), new UserService(new HttpBackend()))
 
@@ -70,5 +72,23 @@ export class AppComponent implements OnInit {
 
   deleteMessage(index: number) {
     this.messageService.deleteMessage(index)
+  }
+
+  toggleNewPizza() {
+    this.showNewPizza = !this.showNewPizza
+  }
+
+  save(event: KeyboardEvent) {
+    if (event.key !== 'Enter') return
+
+    if (!this.newPizza.name || !this.newPizza.price) return
+
+    this.pizzaService.createPizza(this.newPizza).pipe(
+      switchMap(() => this.pizzaService.getPizzas())
+    ).subscribe(pizzas => {
+      this.pizzas = pizzas
+      this.toggleNewPizza()
+      this.newPizza = new Pizza(0, '', undefined, 'cannibale.jpg')
+    })
   }
 }

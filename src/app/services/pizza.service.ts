@@ -29,4 +29,8 @@ export class PizzaService {
   updatePizza(pizza: Pizza): Observable<Pizza> {
     return this.http.put<Pizza>(`/api/pizzas/${pizza.id}`, pizza)
   }
+
+  createPizza(pizza: Pizza): Observable<Pizza> {
+    return this.http.post<Pizza>(`/api/pizzas`, pizza)
+  }
 }
