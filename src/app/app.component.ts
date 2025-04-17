@@ -35,7 +35,7 @@ export class AppComponent {
     this.pizza = { ...pizza }; // On fait un clone de l'objet pour éviter les "références"
   }
 
-  onCancel() {
-    this.pizza = undefined
+  onCancel(event: any) {
+    this.pizza = event
   }
 }

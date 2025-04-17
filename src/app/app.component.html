@@ -1,9 +1,6 @@
 <h1>{{ title }}</h1>
 
-<div *ngIf="pizza">
-  <app-pizza [pizza]="pizza" />
-  <button (click)="onCancel()">Annuler</button>
-</div>
+<app-pizza [pizza]="pizza" (canceled)="onCancel($event)" />
 
 <ul class="pizzas">
   <li
