@@ -8,6 +8,7 @@ import { AuthorComponent } from "./author/author.component";
 import { User } from './models/user';
 import { PizzaService } from './services/pizza.service';
 import { MessageService } from './services/message.service';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +42,13 @@ export class AppComponent implements OnInit {
     })
 
     this.messages = this.messageService.getMessages()
+
+    this.pizzaService.events.pipe(
+      filter(event => event === 'update'),
+      switchMap(() => this.pizzaService.getPizzas())
+    ).subscribe(pizzas => {
+      this.pizzas = pizzas
+    })
   }
 
   onSelect(pizza: Pizza) {

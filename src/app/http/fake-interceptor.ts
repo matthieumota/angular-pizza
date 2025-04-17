@@ -20,13 +20,13 @@ const users: any[] = [
 
 const response = (body?: any, status: number = 200) => {
   if (status >= 400) {
-    return throwError(() => ({ status, body })).pipe(materialize(), delay(500), dematerialize());
+    return throwError(() => ({ status, body })).pipe(materialize(), delay(200), dematerialize());
   }
 
-  return of(new HttpResponse({ status, body })).pipe(delay(500));
+  return of(new HttpResponse({ status, body })).pipe(delay(200));
 };
 
-const syncStorage = () => {
+const syncStorage = (pizzas?: Pizza[]) => {
   if (typeof localStorage !== 'undefined') {
     localStorage.setItem('pizzas', JSON.stringify(pizzas));
   }
@@ -65,7 +65,13 @@ export class FakeInterceptor implements HttpInterceptor {
       let pizza = pizzas.find(p => p.id === idFromUrl());
       pizza = { ...pizza, ...body };
 
-      syncStorage();
+      if (!pizza) {
+        return response('Not found', 404)
+      }
+
+      pizzas = pizzas.map(p => p.id === idFromUrl() ? pizza : p)
+
+      syncStorage(pizzas);
 
       return response(pizza);
     } else if (url.match(/\/api\/pizzas\/\d+/) && method === 'DELETE') {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pizza } from '../models/pizza';
 import { HttpClient } from '@angular/common/http';
-import { delay, Observable } from 'rxjs';
+import { delay, Observable, Subject } from 'rxjs';
 
 export const PIZZAS: Pizza[] = [
   { id: 1, name: 'Reine', price: 12, image: 'reine.jpg' },
@@ -14,6 +14,8 @@ export const PIZZAS: Pizza[] = [
   providedIn: 'root'
 })
 export class PizzaService {
+  events = new Subject<string>()
+
   constructor(private http: HttpClient) {}
 
   getPizzas(): Observable<Pizza[]> {
@@ -22,5 +24,9 @@ export class PizzaService {
 
   getPizzasSlowly(): Observable<Pizza[]> {
     return this.getPizzas().pipe(delay(2000))
+  }
+
+  updatePizza(pizza: Pizza): Observable<Pizza> {
+    return this.http.put<Pizza>(`/api/pizzas/${pizza.id}`, pizza)
   }
 }
