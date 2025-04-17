@@ -8,7 +8,7 @@ import { AuthorComponent } from "./author/author.component";
 import { User } from './models/user';
 import { PizzaService } from './services/pizza.service';
 import { MessageService } from './services/message.service';
-import { filter, switchMap } from 'rxjs';
+import { filter, finalize, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -87,13 +87,17 @@ export class AppComponent implements OnInit {
   }
 
   save(event: KeyboardEvent) {
+    if (this.loading) return
     if (event.key !== 'Enter') return
 
     if (!this.newPizza.name || !this.newPizza.price) return
 
+    this.loading = true
+
     this.pizzaService.createPizza(this.newPizza).pipe(
-      switchMap(() => this.pizzaService.getPizzas())
-    ).subscribe(pizzas => {
+      switchMap(() => this.pizzaService.getPizzas()),
+      finalize(() => this.loading = false),
+    ).subscribe((pizzas) => {
       this.pizzas = pizzas
       this.toggleNewPizza()
       this.newPizza = new Pizza(0, '', undefined, 'cannibale.jpg')
