@@ -95,6 +95,17 @@
             ],
             "scripts": []
           }
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "pizzaparty:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pizzaparty:serve:production"
+            }
+          }
         }
       }
     }

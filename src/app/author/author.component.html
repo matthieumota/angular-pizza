@@ -1,7 +1,7 @@
 <p>{{ author.firstname }} {{ author.name }}</p>
 <img [src]="author.avatar" [alt]="`${author.firstname} ${author.name}`" />
 <p>Née le {{ author.birthday }}</p>
-<p>Âge: {{ author.age() }}</p>
+<p class="age">Âge: {{ author.age() }}</p>
 <select [(ngModel)]="author.birthday">
   <option *ngFor="let year of years" [value]="`${year}-${author.month()}-${author.day()}`">
     {{ year }}

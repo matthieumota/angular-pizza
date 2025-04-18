@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PizzaComponent } from './pizza.component';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('PizzaComponent', () => {
   let component: PizzaComponent;
@@ -8,7 +10,11 @@ describe('PizzaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PizzaComponent]
+      imports: [PizzaComponent],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+      ]
     })
     .compileComponents();
 
