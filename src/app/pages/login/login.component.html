@@ -1,1 +1,20 @@
-<p>On affiche un form avec {{ username || 'rien' }}</p>
+<form (ngSubmit)="register(userForm)" #userForm="ngForm">
+  <div class="mb-3">
+    <label class="block">Username</label>
+    <input name="username" [(ngModel)]="user.username" required minlength="3"
+      class="border border-gray-400"
+      #username="ngModel"
+      [ngClass]="{
+        '!border-red-500': (username.dirty || username.touched || userForm.submitted) && userForm.invalid
+      }"
+    >
+    <div *ngIf="(username.dirty || userForm.submitted) && username.hasError('required')" class="text-red-500">Username is required</div>
+    <div *ngIf="(username.touched || userForm.submitted) && username.hasError('minlength')" class="text-red-500">Username should be 3 characters min</div>
+  </div>
+  <div class="mb-3">
+    <label class="block">Password</label>
+    <input type="password" name="password" [(ngModel)]="user.password" required class="border border-gray-400" #password="ngModel">
+    <div *ngIf="(password.dirty || userForm.submitted) && password.hasError('required')" class="text-red-500">Password is required</div>
+  </div>
+  <button class="px-2 py-1 bg-gray-200 hover:bg-gray-400 duration-300 rounded-md disabled:opacity-50 disabled:hover:bg-gray-200" [disabled]="userForm.invalid && false">Register</button>
+</form>

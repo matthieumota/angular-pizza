@@ -1,14 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  username!: string
+  user = {
+    username: '',
+    password: ''
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -16,7 +21,13 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.username = params.get('username')!
+      this.user.username = params.get('username')!
     })
+  }
+
+  register(form: NgForm) {
+    if (form.invalid) return
+
+    console.log(this.user)
   }
 }
