@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Pizza } from '../../models/pizza';
 import { PizzaService } from '../../services/pizza.service';
-import { filter, finalize, switchMap } from 'rxjs';
+import { filter, finalize, Subscription, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PizzaComponent } from '../../pizza/pizza.component';
@@ -20,6 +20,7 @@ export class PizzasComponent {
   loading: boolean = false;
   showNewPizza: boolean = false
   newPizza: Pizza = new Pizza(0, '', undefined, 'cannibale.jpg')
+  subscription!: Subscription
 
   // pizzaService: PizzaService = new PizzaService(new HttpBackend(), new UserService(new HttpBackend()))
 
@@ -33,13 +34,20 @@ export class PizzasComponent {
       this.loading = false
     })
 
-    this.pizzaService.events.pipe(
+    // Attention dans un Subject il faut unsubscribe
+    this.subscription = this.pizzaService.events.pipe(
       filter(event => event === 'update'),
       switchMap(() => this.pizzaService.getPizzas())
     ).subscribe(pizzas => {
       console.log('call')
       this.pizzas = pizzas
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+    //this.pizzaService.events.complete()
+    //this.pizzaService.events = new Subject<string>()
   }
 
   onSelect(pizza: Pizza) {
