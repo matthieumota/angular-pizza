@@ -20,7 +20,6 @@ export class PizzaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('composant init')
     //console.log(this.route.snapshot.paramMap.get('id'))
     this.route.paramMap.pipe(
       switchMap(params => this.pizzaService.getPizza(+params.get('id')!))

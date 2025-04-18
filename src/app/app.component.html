@@ -3,6 +3,9 @@
 <nav>
   <a routerLink="/">Accueil</a>
   <a routerLink="/pizzas">Pizzas</a>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/login/toto">Login with toto</a>
+  <a [routerLink]="['/login', { username: 'toto' }]">Login with toto</a>
 </nav>
 
 <ul>
