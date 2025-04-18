@@ -5,8 +5,6 @@
   <a routerLink="/pizzas">Pizzas</a>
 </nav>
 
-<router-outlet />
-
 <ul>
   <li *ngFor="let message of messages; index as i">
     <h3>{{ message }}</h3>
@@ -14,10 +12,4 @@
   </li>
 </ul>
 
-<app-counter (changed)="computeTotal($event)" />
-<app-counter [value]="5" (changed)="computeTotal($event)" />
-<app-counter [value]="10" (changed)="computeTotal($event)" />
-
-<p>{{ total }}</p>
-
-<app-author [author]="user" />
+<router-outlet />
