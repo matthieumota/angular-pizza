@@ -1,29 +1,11 @@
 <h1>{{ title }}</h1>
 
-<app-pizza [pizza]="pizza" (canceled)="onCancel($event)" />
+<nav>
+  <a routerLink="/">Accueil</a>
+  <a routerLink="/pizzas">Pizzas</a>
+</nav>
 
-<p *ngIf="loading">
-  Chargement...
-</p>
-
-<ul class="pizzas">
-  <li
-    *ngFor="let p of pizzas"
-    [class.selected]="pizza && p.id === pizza.id"
-  >
-    <div (click)="onSelect(p)">
-      <h3>{{ p.name }}</h3>
-      <img [src]="`/assets/pizzas/${p.image}`" [alt]="p.name">
-    </div>
-    <button (click)="delete(p)">X</button>
-  </li>
-
-  <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas">
-    <div>
-      {{ pizza.name }}
-    </div>
-  </ng-template> -->
-</ul>
+<router-outlet />
 
 <ul>
   <li *ngFor="let message of messages; index as i">
@@ -31,17 +13,6 @@
     <button (click)="deleteMessage(i)">X</button>
   </li>
 </ul>
-
-<button (click)="toggleNewPizza()">
-  Ajouter une pizza
-</button>
-
-<div *ngIf="showNewPizza">
-  <input type="text" [(ngModel)]="newPizza.name" (keydown)="save($event)">
-  <input type="text" [(ngModel)]="newPizza.price" (keydown)="save($event)">
-</div>
-
-<app-pizza-search />
 
 <app-counter (changed)="computeTotal($event)" />
 <app-counter [value]="5" (changed)="computeTotal($event)" />

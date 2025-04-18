@@ -1,0 +1,35 @@
+<app-pizza [pizza]="pizza" (canceled)="onCancel($event)" />
+
+<p *ngIf="loading">
+  Chargement...
+</p>
+
+<ul class="pizzas">
+  <li
+    *ngFor="let p of pizzas"
+    [class.selected]="pizza && p.id === pizza.id"
+  >
+    <div (click)="onSelect(p)">
+      <h3>{{ p.name }}</h3>
+      <img [src]="`/assets/pizzas/${p.image}`" [alt]="p.name">
+    </div>
+    <button (click)="delete(p)">X</button>
+  </li>
+
+  <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas">
+    <div>
+      {{ pizza.name }}
+    </div>
+  </ng-template> -->
+</ul>
+
+<button (click)="toggleNewPizza()">
+  Ajouter une pizza
+</button>
+
+<div *ngIf="showNewPizza">
+  <input type="text" [(ngModel)]="newPizza.name" (keydown)="save($event)">
+  <input type="text" [(ngModel)]="newPizza.price" (keydown)="save($event)">
+</div>
+
+<app-pizza-search />
