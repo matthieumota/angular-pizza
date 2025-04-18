@@ -1,0 +1,5 @@
+<div *ngIf="pizza">
+  <h1>{{ pizza.name }}</h1>
+  <img [src]="`/assets/pizzas/${pizza.image}`" [alt]="pizza.name">
+  <p>{{ pizza.price }}</p>
+</div>

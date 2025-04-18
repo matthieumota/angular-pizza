@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PizzaComponent } from '../../pizza/pizza.component';
 import { PizzaSearchComponent } from '../../pizza-search/pizza-search.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pizzas',
-  imports: [FormsModule, CommonModule, PizzaComponent, PizzaSearchComponent],
+  imports: [FormsModule, CommonModule, PizzaComponent, PizzaSearchComponent, RouterLink],
   templateUrl: './pizzas.component.html',
   styleUrl: './pizzas.component.scss'
 })
@@ -36,6 +37,7 @@ export class PizzasComponent {
       filter(event => event === 'update'),
       switchMap(() => this.pizzaService.getPizzas())
     ).subscribe(pizzas => {
+      console.log('call')
       this.pizzas = pizzas
     })
   }

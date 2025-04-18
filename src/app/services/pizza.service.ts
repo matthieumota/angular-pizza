@@ -26,6 +26,10 @@ export class PizzaService {
     return this.getPizzas().pipe(delay(2000))
   }
 
+  getPizza(id: number): Observable<Pizza> {
+    return this.http.get<Pizza>(`/api/pizzas/${id}`)
+  }
+
   updatePizza(pizza: Pizza): Observable<Pizza> {
     return this.http.put<Pizza>(`/api/pizzas/${pizza.id}`, pizza)
   }
