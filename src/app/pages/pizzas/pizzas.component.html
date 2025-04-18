@@ -13,8 +13,8 @@
       <h3>{{ p.name }}</h3>
       <img [src]="`/assets/pizzas/${p.image}`" [alt]="p.name">
     </div>
-    <button (click)="delete(p)">X</button>
-    <a [routerLink]="['/pizzas', p.id]">Voir</a>
+    <button (click)="delete(p)" class="px-2 py-1 bg-gray-200 hover:bg-gray-400 duration-300 rounded-md">X</button>
+    <a [routerLink]="['/pizzas', p.id]" class="px-2 py-1 bg-gray-200 hover:bg-gray-400 duration-300 rounded-md">Voir</a>
   </li>
 
   <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas">
@@ -24,13 +24,13 @@
   </ng-template> -->
 </ul>
 
-<button (click)="toggleNewPizza()">
+<button (click)="toggleNewPizza()" class="px-2 py-1 bg-gray-200 hover:bg-gray-400 duration-300 rounded-md">
   Ajouter une pizza
 </button>
 
 <div *ngIf="showNewPizza">
-  <input type="text" [(ngModel)]="newPizza.name" (keydown)="save($event)">
-  <input type="text" [(ngModel)]="newPizza.price" (keydown)="save($event)">
+  <input type="text" [(ngModel)]="newPizza.name" (keydown)="save($event)" class="border">
+  <input type="text" [(ngModel)]="newPizza.price" (keydown)="save($event)" class="border">
 </div>
 
 <app-pizza-search />
